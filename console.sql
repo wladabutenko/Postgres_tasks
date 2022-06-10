@@ -113,7 +113,23 @@ SELECT c3.name as category_name,
 ) as ranked_category
 WHERE rnk = 1
 
-
+/*task 8 - with cte*/
+WITH cte_film AS (
+    SELECT film_id,
+           title,
+           (CASE
+               WHEN length < 60 THEN 'Short'
+               WHEN length < 100 THEN 'Medium'
+               ELSE 'Long'
+            END) length
+FROM film
+)
+SELECT film_id,
+        title,
+        length
+FROM cte_film
+WHERE length = 'Medium'
+ORDER BY film_id;
 
 
 
